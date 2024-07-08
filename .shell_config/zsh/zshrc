@@ -45,10 +45,6 @@ setopt kshglob
 # eliminar no match message
 unsetopt nomatch
 
-# Setting prompt
-# source ~/.shell_config/prompt/prompt-dracula.sh
-eval "$(starship init zsh)"
-
 # FZF
 # Auto-completion
 # shellcheck disable=SC1090
@@ -72,19 +68,6 @@ if [[ $DISPLAY ]] || [[ "$(< /proc/sys/kernel/osrelease)" == *microsoft* ]]; the
     [[ -z "$TMUX" ]] && exec tmux;
     run-parts /etc/update-motd.d
 fi
-
-# Calling custom commands
-# shellcheck disable=1090
-# for f in "$HOME"/.shell_config/commands/*;
-# do
-#    if [ -f "$f" ]
-#    then
-#        source "$f";
-#    fi
-# done
-
-# Terraform settings
-# complete -C /usr/bin/terraform terraform
 
 # Calling evn variables
 # shellcheck disable=1090
