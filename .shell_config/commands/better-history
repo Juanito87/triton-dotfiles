@@ -1,0 +1,20 @@
+#!/bin/bash
+# Formating options to call history command in a pretier way.
+better_history()
+{
+    # Local are color codes, can be changed, for more info
+    #http://es.tldp.org/COMO-INSFLUG/COMOs/Bash-Prompt-Como/Bash-Prompt-Como-5.html
+    local blue="\033[0;34m"
+    local nocolor="\033[0m"
+    # Format for date to be displayed be history, for other options
+    # https://man7.org/linux/man-pages/man3/strftime.3.html
+    HISTTIMEFORMAT="$(echo -e "${blue}[%d-%m-%y %T] $nocolor")"
+    export HISTTIMEFORMAT
+    export HISTSIZE=10000 # size in memory during session.
+    export HISTFILESIZE=50000 # size of the file holding history for future sessions.
+    export HISTCONTROL=ignoreboth # don't put duplicate lines or lines starting with space in the history.
+    shopt -s histappend
+}
+
+# call main function
+better_history "$@"

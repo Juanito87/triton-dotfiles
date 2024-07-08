@@ -1,0 +1,15 @@
+[submodule "plugins/tmux-net-speed"]
+	path = plugins/tmux-net-speed
+	url = https://github.com/Juanito87/tmux-net-speed.git
+[submodule "plugins/tmux-cpu"]
+	path = plugins/tmux-cpu
+	url = https://github.com/tmux-plugins/tmux-cpu.git
+[submodule "plugins/tpm"]
+	path = plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "plugins/tmux-yank"]
+	path = plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank.git
+[submodule "completion"]
+	path = completion
+	url = https://github.com/imomaliev/tmux-bash-completion.git

@@ -1,0 +1,70 @@
+#!/bin/bash
+# Set global variables
+# Number of files to process
+m=1
+# r = 0 to keep the original file r = 1 to remove it
+r=0
+# option index
+OPTIND=1
+
+# Function definitions
+show_help() {
+ cat << EOF
+ Usage: bak [-hr] [-m NUMBER] [FILE/S]...
+ Copy FILE to a new one with the following name format filename+timestamp+.bak.
+
+     -h          display this help and exit
+     -m NUMBER   support for backing multiple files, equal to NUMBER
+     -r          remove the file after back up
+EOF
+}
+
+function bak()
+{
+if [ "$#" -eq 0 ]
+then
+    show_help
+else
+# # Check that there is only one parameter
+#     if [ "$#" -eq "$m" ]
+#     then
+        for param in "$@";
+            do
+               # Make timestamp to avoid overwriting or promtpting
+               time=$(date +%d-%m-%y_%H:%M)
+               # Copy and preserve permitions
+               cp -p "$param" "bak_$time-$param" >&2
+               if [ $r -eq 1 ]
+               then
+                   rm "$param"
+               fi
+            done
+    # fi
+fi
+exit 0
+}
+
+OPTIND=1
+# Parse options
+while getopts "hrm:" opt; do
+    case $opt in
+        h) show_help
+           exit 0;;
+        r) r=1;;
+        m) if [ "$OPTARG" -gt 1 ]
+           then
+               # shellcheck disable=SC2034
+               m="$OPTARG"
+           else
+               echo "NUMBER must be equal to 2 or higher"
+               exit 1
+           fi;;
+        *) echo "Invalid option -$opt" >&2
+           show_help >&2
+           exit 2;;
+    esac
+done
+shift "$((OPTIND-1))"
+
+# Call main function
+bak "$@"

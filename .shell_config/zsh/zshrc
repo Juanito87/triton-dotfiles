@@ -1,0 +1,91 @@
+# The following lines were added by compinstall
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list ''
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' prompt '*'
+zstyle :compinstall filename '$HOME/.zshrc'
+
+# git completion
+# zstyle ':completion:*:*:git:*' script ~/.shell_config/zsh/completions/git-completion.zsh
+
+# innernet completion
+zstyle ':completion:*:*:innernet:*' script ~/.shell_config/zsh/completions/_innernet
+
+# Highlight the current autocomplete option
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Better SSH/Rsync/SCP Autocomplete
+# zstyle ':completion:*:(ssh|scp|rsync):*' tag-order ' hosts:-ipaddr:ip\ address hosts:-host:host files'
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*(.|:)*' loopback ip6-loopback localhost ip6-localhost broadcasthost
+# zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<->.<->.<->|(|::)([[:xdigit:].]##:(#c,2))##(|%*))' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+
+# Allow for autocomplete to be case insensitive
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+      '+l:|?=** r:|?=**'
+
+# Setting function directory
+# fpath=(~/.shell_config/zsh $fpath)
+fpath=(~/.shell_config $fpath)
+
+# Setting autocomplete
+autoload -Uz compinit
+compinit
+_comp_options+=(globdots)
+# autoload -U +X bashcompinit && bashcompinit
+
+# set change directory without cd and notification for background jobs
+setopt autocd notify
+
+# Setting vi mode for zsh
+bindkey -v
+
+# remplazo de shopt para bash
+setopt kshglob
+
+# eliminar no match message
+unsetopt nomatch
+
+# Setting prompt
+# source ~/.shell_config/prompt/prompt-dracula.sh
+eval "$(starship init zsh)"
+
+# FZF
+# Auto-completion
+# shellcheck disable=SC1090
+[[ $- == *i* ]] && source "$HOME"/.fzf/shell/completion.zsh 2> /dev/null
+# Key bindings
+# shellcheck disable=SC1090
+source "$HOME"/.fzf/shell/key-bindings.zsh
+
+# Calling config files
+# shellcheck disable=1090
+for f in "$HOME"/.shell_config/myalias/*;
+do
+   if [ -f "$f" ]
+   then
+       source "$f";
+   fi
+done
+
+# Setting tmux to launch always on gui only or on wsl
+if [[ $DISPLAY ]] || [[ "$(< /proc/sys/kernel/osrelease)" == *microsoft* ]]; then
+    [[ -z "$TMUX" ]] && exec tmux;
+    run-parts /etc/update-motd.d
+fi
+
+# Calling custom commands
+# shellcheck disable=1090
+# for f in "$HOME"/.shell_config/commands/*;
+# do
+#    if [ -f "$f" ]
+#    then
+#        source "$f";
+#    fi
+# done
+
+# Terraform settings
+# complete -C /usr/bin/terraform terraform
+
+# Calling evn variables
+# shellcheck disable=1090
+source "$HOME"/.shell_config/env

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Enabling autocomplete for the command
+# -c will indicate the commando to autocomplete
+# -f will indicate to not complete with filenames
+function better_sudo()
+{
+complete -cf sudo "$@"
+}
+
+# Call main function
+better_sudo "$@"

@@ -1,0 +1,70 @@
+#!/bin/bash
+# set vi mode for bash and vim as the default editor
+set -o vi
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+shopt -s globstar
+
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Setting tmux to launch always on gui only or on wsl
+if [[ $- == *i* ]]; then
+    [[ -z "$TMUX" ]] && exec tmux;
+    run-parts /etc/update-motd.d
+fi
+
+#Enabling bash completion
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+      # shellcheck disable=SC1091
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+      # shellcheck disable=SC1091
+    . /etc/bash_completion
+  fi
+fi
+
+# FZF
+# Auto-completion
+# shellcheck disable=SC1091 disable=1090
+[[ $- == *i* ]] && source "$HOME"/.fzf/shell/completion.bash 2> /dev/null
+# Key bindings
+# shellcheck disable=SC1090 disable=SC1091
+source "$HOME"/.fzf/shell/key-bindings.bash
+
+# Enabling tmux completion
+# shellcheck disable=SC1091 disable=1090
+source "$HOME"/.tmux/completion/completions/tmux
+
+eval "$(starship init bash)"
+
+# Calling config files
+# shellcheck disable=1090
+for f in "$HOME"/.shell_config/myalias/*;
+do
+   if [ -f "$f" ]
+   then
+       source "$f";
+   fi
+done
+
+# Terraform settings
+complete -C /usr/bin/terraform terraform
+
+# Calling env variables
+# shellcheck disable=SC1091 disable=1090
+source "$HOME"/.shell_config/env
+# shellcheck disable=SC1091 disable=1090
+source "$HOME"/.shell_config/bash/alacritty.bash
+if [[ $USER != root ]]; then
+# shellcheck disable=SC1091 disable=1090
+    source "$HOME/.cargo/env"
+fi
+# Saving all commands to history, to have all tmux panes history.
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
