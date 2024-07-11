@@ -48,10 +48,10 @@ unsetopt nomatch
 # FZF
 # Auto-completion
 # shellcheck disable=SC1090
-[[ $- == *i* ]] && source "$HOME"/.fzf/shell/completion.zsh 2> /dev/null
+# [[ $- == *i* ]] && source "$HOME"/.fzf/shell/completion.zsh 2> /dev/null
 # Key bindings
 # shellcheck disable=SC1090
-source "$HOME"/.fzf/shell/key-bindings.zsh
+# source "$HOME"/.fzf/shell/key-bindings.zsh
 
 # Calling config files
 # shellcheck disable=1090
