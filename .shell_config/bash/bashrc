@@ -13,12 +13,6 @@ shopt -s globstar
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Setting tmux to launch always on gui only or on wsl
-if [[ $- == *i* ]]; then
-    [[ -z "$TMUX" ]] && exec tmux;
-    run-parts /etc/update-motd.d
-fi
-
 #Enabling bash completion
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -55,9 +49,6 @@ done
 # Calling env variables
 # shellcheck disable=SC1091 disable=1090
 source "$HOME"/.shell_config/env
-if [[ $USER != root ]]; then
-# shellcheck disable=SC1091 disable=1090
-    source "$HOME/.cargo/env"
-fi
+
 # Saving all commands to history, to have all tmux panes history.
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
