@@ -2,37 +2,17 @@
 # Variables de entorno para terminales
 
 # vim as the default editor
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# FZF
-# shellcheck disable=SC1090
-if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
-fi
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--height 96% --reverse --preview "cat {}"'
-
 # Exporting personalized commands to path
 export PATH=~/.shell_config/commands:$PATH
-
-# Terraform
-export TF_LOG=TRACE
-export TF_LOG_PATH="terraform.txt"
 
 # GO PATH
 export GOPATH=$HOME/go:/home/juanito/repo/juanito87/platzi/go
 export PATH=~/go/bin:$PATH
 
-# SSH users
-export EDU_SSH_USER0="soporte"
-export EDU_SSH_USER1="root"
-
 # Starship
 export STARSHIP_CONFIG=~/.shell_config/starship.toml
-
-# Python env
-# export
