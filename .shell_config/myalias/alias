@@ -25,9 +25,6 @@ alias df='\df -h'
 # Setting Alias for enhanced commands
 alias ls='better-ls'
 alias history='better-history'
-alias ssh='better-ssh'
-alias vsh='better-vsh'
-# alias sudo='better-sudo'
 
 # Reload rc files local/remote
 alias brc='source ~/.bashrc'
@@ -42,19 +39,9 @@ alias .4='cd ../../..'
 alias .5='cd ../../../..'
 alias .6='cd ../../../../..'
 
-# Python env
-alias a29='source ~/.ansible2.9/bin/activate && cd ~/repo/triton && source ./rpcpool/rpcpool-main/vault-env.sh'
-alias a27='deactivate 2>/dev/null && source ~/.ansible2.9-2.7/bin/activate'
-alias a210='source ~/.ansible2.10/bin/activate && cd ~/repo/edu'
-
 # Utils
 alias hatgen='PASS=$(openssl rand -hex 14) && echo $PASS && mkpasswd -m sha-256 $PASS'
 alias rmotd='run-parts /etc/update-motd.d/'
 alias myip="curl http://ipecho.net/plain; echo"
 alias fixbt="sudo rmmod btusb && sudo modprobe btusb"
 alias nvdot="cd ~/.config/nvim && nvim ."
-
-# Github cli
-alias gc='gh copilot'
-alias gcs='gh copilot suggest'
-alias gce='gh copilot explain'
