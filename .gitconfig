@@ -1,7 +1,6 @@
 [user]
     email = juancruz.f87@gmail.com
     name = juanito87
-	signingKey = EAB042894FD44AFD
 [url "git@github.com:"]
       pushInsteadOf = http://github.com/
       pushInsteadOf = git@github.com:
@@ -20,8 +19,6 @@
 	smudge = git-lfs smudge -- %f
 [pull]
 	rebase = false
-[commit]
-	gpgsign = true
 [init]
 	defaultBranch = main
 [submodule]
