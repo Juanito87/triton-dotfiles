@@ -1,9 +1,3 @@
-[user]
-    email = juancruz.f87@gmail.com
-    name = juanito87
-[url "git@github.com:"]
-      pushInsteadOf = http://github.com/
-      pushInsteadOf = git@github.com:
 [core]
     excludesfile = ~/.gitignore-global
 [difftool]
