@@ -38,6 +38,7 @@ mkdir -p $HOME/bin
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
 [ -f .bashrc ] && mv .bashrc .bashrc.dist
+ls -lah .dotfiles/bin/
 # Run dotfiles.symlink if it exists
 if [[ -x $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
   $HOME/.dotfiles/bin/dotfiles.symlink install
