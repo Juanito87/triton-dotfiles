@@ -33,6 +33,7 @@ list () {
 install () {
     if [ -h "$LINK" ]; then
         # The target is already symlinked.
+        echo "The target $TARGET is already linked"
         return
     fi
 
