@@ -12,7 +12,7 @@ echo >&2 " HOME        $HOME"
 echo >&2 "====================================================================="
 
 # Install the dotfiles I want
-[ -f dotfiles.codespaces ] && cp -r dotfiles.codespaces $HOME/.dotfiles.codespaces
+[ -f $HOME/.dotfiles ] && mv -r $HOME/.dotfiles $HOME/.dotfiles.codespaces
 if [[ -z "$PAT_TOKEN" ]] 
 then
   git clone --depth 1 --recurse-submodules --shallow-submodules https://${GITHUB_USER}:${PAT_TOKEN}@github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
@@ -30,8 +30,8 @@ mkdir -p $HOME/bin
 #export SUDO_ASKPASS=/bin/true
 
 # A bit of a hack
-[ -f .gitconfig ] && mv .gitconfig .gitconfig.private  
-[ -f .bashrc ] && mv .bashrc .bashrc.dist             
+[ -f .gitconfig ] && mv .gitconfig .gitconfig.private
+[ -f .bashrc ] && mv .bashrc .bashrc.dist
 [ -x $HOME/.dotfiles/bin/dotfiles.symlink ] && $HOME/.dotfiles/bin/dotfiles.symlink install || echo "Missing dotfiles.symlink"
 
 # Setting proper terminal
