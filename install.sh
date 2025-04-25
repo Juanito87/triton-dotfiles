@@ -12,12 +12,12 @@ echo >&2 " HOME        $HOME"
 echo >&2 "====================================================================="
 
 # Install the dotfiles I want
-cp -r dotfiles.codespaces $HOME/.dotfiles.codespaces
-if [[ -z "$PAT_TOKEN" ]] #this
+[ -f dotfiles.codespaces ] && cp -r dotfiles.codespaces $HOME/.dotfiles.codespaces
+if [[ -z "$PAT_TOKEN" ]] 
 then
   git clone --depth 1 --recurse-submodules --shallow-submodules https://${GITHUB_USER}:${PAT_TOKEN}@github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
 else
-  git clone https://github.com/${GITHUB_USER}/dotfiles.git $HOME/.dotfiles
+  git clone https://github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
 fi
 
 # Do the rest of the tasks from the home dir
@@ -30,15 +30,15 @@ mkdir -p $HOME/bin
 #export SUDO_ASKPASS=/bin/true
 
 # A bit of a hack
-[ -f .gitconfig ] && mv .gitconfig .gitconfig.private  # Added checks
-[ -f .bashrc ] && mv .bashrc .bashrc.dist             # Added checks
+[ -f .gitconfig ] && mv .gitconfig .gitconfig.private  
+[ -f .bashrc ] && mv .bashrc .bashrc.dist             
 [ -x $HOME/.dotfiles/bin/dotfiles.symlink ] && $HOME/.dotfiles/bin/dotfiles.symlink install || echo "Missing dotfiles.symlink"
 
 # Setting proper terminal
-if [[ -n "$FISH"  ]]; then#this
+if [[ -n "$FISH"  ]]; then
   echo "Setting shell to fish"
   sudo chsh -s /usr/bin/fish $USER
-elif [[ -n "$ZSH" ]]; then#this
+elif [[ -n "$ZSH" ]]; then
   echo "Setting shell to zsh"
   sudo chsh -s /usr/bin/zsh $USER
 else
