@@ -11,12 +11,18 @@ echo >&2 " USER        $USER"
 echo >&2 " HOME        $HOME"
 echo >&2 "====================================================================="
 
-# Install the dotfiles I want
-[ -f $HOME/.dotfiles ] && mv -r $HOME/.dotfiles $HOME/.dotfiles.codespaces
-if [[ -z "$PAT_TOKEN" ]] 
-then
+# Backup existing .dotfiles directory if it exists
+if [[ -d $HOME/.dotfiles ]]; then
+  echo "Backing up existing .dotfiles directory"
+  mv $HOME/.dotfiles $HOME/.dotfiles.backup || echo "Backup failed"
+fi
+
+# Clone the dotfiles repository
+if [[ -n "$PAT_TOKEN" ]]; then
+  echo "Using PAT token to clone repository"
   git clone --depth 1 --recurse-submodules --shallow-submodules https://${GITHUB_USER}:${PAT_TOKEN}@github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
 else
+  echo "Cloning repository without PAT token"
   git clone https://github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
 fi
 
@@ -32,7 +38,12 @@ mkdir -p $HOME/bin
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
 [ -f .bashrc ] && mv .bashrc .bashrc.dist
-[ -x $HOME/.dotfiles/bin/dotfiles.symlink ] && $HOME/.dotfiles/bin/dotfiles.symlink install || echo "Missing dotfiles.symlink"
+# Run dotfiles.symlink if it exists
+if [[ -x $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
+  $HOME/.dotfiles/bin/dotfiles.symlink install
+else
+  echo "Missing dotfiles.symlink"
+fi
 
 # Setting proper terminal
 if [[ -n "$FISH"  ]]; then
