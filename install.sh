@@ -40,8 +40,16 @@ mkdir -p $HOME/bin
 [ -f .bashrc ] && mv .bashrc .bashrc.dist
 ls -lah .dotfiles/bin/
 # Run dotfiles.symlink if it exists
-if [[ -x $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
-  $HOME/.dotfiles/bin/dotfiles.symlink install
+if [[ -f $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
+  echo "File exists"
+  if [[ -x $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
+    echo "File is executable"
+    $HOME/.dotfiles/bin/dotfiles.symlink install
+  else
+    echo "Making file executable"
+    chmod +x $HOME/.dotfiles/bin/dotfiles.symlink
+    $HOME/.dotfiles/bin/dotfiles.symlink install
+  fi
 else
   echo "Missing dotfiles.symlink"
 fi
@@ -65,14 +73,5 @@ curl -s -L https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-
 
 PATH=${PATH}:/opt/nvim/bin/
 
-# Create config path
-# mkdir -p ~/.config
-#
-# # Link config if not already linked
-# if [ ! -d ~/.config/nvim ]; then
-#   ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
-# fi
-#
-# Install required tools
 sudo apt-get update
 sudo apt-get install -y ripgrep fd-find
