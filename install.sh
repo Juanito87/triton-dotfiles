@@ -75,3 +75,4 @@ PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
 sudo apt-get install -y ripgrep fd-find
+curl -sS https://starship.rs/install.sh | sh
