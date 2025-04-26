@@ -54,10 +54,6 @@ source "$HOME"/.shell_config/env
 # Saving all commands to history, to have all tmux panes history.
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-# shellcheck disable=SC1091 disable=1090
-    source "$HOME/.cargo/env"
-fi
-
 #nod configs
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

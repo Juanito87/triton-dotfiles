@@ -36,13 +36,18 @@ cd $HOME
 # create bindir
 mkdir -p $HOME/bin
 
-# Make passwordless sudo work
-#export SUDO_ASKPASS=/bin/true
+# Install fzf
+FZF_VERSION=v0.61.3
+echo "Install fzf to version $FZF_VERSION"
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+cd ~/.fzf
+git clone $FZF_VERSION
+~/.fzf/install
 
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
 [ -f .bashrc ] && mv .bashrc .bashrc.dist
-ls -lah .dotfiles/bin/
+
 # Run dotfiles.symlink if it exists
 if [[ -f $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
   echo "File exists"
@@ -70,10 +75,6 @@ else
   sudo chsh -s /usr/bin/bash $USER
 fi
 
-# Install fzf
-FZF_VERSION=0.30.0
-echo "Install fzf to version 0.30.0"
-curl -s -L https://github.com/junegunn/fzf/releases/download/${FZF_VERSION}/fzf-${FZF_VERSION}-linux_amd64.tar.gz | tar xzC $HOME/bin
 
 PATH=${PATH}:/opt/nvim/bin/
 
