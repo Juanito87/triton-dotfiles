@@ -42,7 +42,7 @@ echo "Install fzf to version $FZF_VERSION"
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 cd ~/.fzf
 git clone $FZF_VERSION
-~/.fzf/install
+~/.fzf/install --no-key-bindings --no-completion --no-update-rc
 
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
@@ -80,4 +80,5 @@ PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
 sudo apt-get install -y ripgrep fd-find
-curl -sS https://starship.rs/install.sh | sh
+cargo install starship --locked
+source ~/.bashrc
