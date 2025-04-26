@@ -1,0 +1,3 @@
+[submodule ".config/nvim.symlink"]
+	path = .config/nvim.symlink
+	url = git@github.com:Juanito87/kickstart.nvim.git
