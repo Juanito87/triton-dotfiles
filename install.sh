@@ -12,9 +12,14 @@ echo >&2 " HOME        $HOME"
 echo >&2 "====================================================================="
 
 # Backup existing .dotfiles directory if it exists
-if [[ -d $HOME/.dotfiles ]]; then
-  echo "Backing up existing .dotfiles directory"
-  mv $HOME/.dotfiles $HOME/.dotfiles.backup || echo "Backup failed"
+if [[ -d $HOME/.dotfiles.backup ]]; then
+  rm -rf
+  $HOME/.dotfiles.backup
+else
+  if [[ -d $HOME/.dotfiles ]]; then
+    echo "Backing up existing .dotfiles directory"
+    mv $HOME/.dotfiles $HOME/.dotfiles.backup || echo "Backup failed"
+  fi
 fi
 
 # Clone the dotfiles repository
@@ -39,10 +44,19 @@ mkdir -p $HOME/bin
 # Install fzf
 FZF_VERSION=v0.61.3
 echo "Install fzf to version $FZF_VERSION"
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-cd ~/.fzf
-git clone $FZF_VERSION
-~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+if [ "$(ls -A ~/.fzf)" ];
+then
+  cd ~/.fzf
+  git fetch
+  git checkout $FZF_VERSION
+  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+else
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  cd ~/.fzf
+  git checkout $FZF_VERSION
+  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+fi
+cd ..
 
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
@@ -79,6 +93,12 @@ fi
 PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
-sudo apt-get install -y ripgrep fd-find
+sudo apt-get install -y ripgrep fd-find cmake
 cargo install starship --locked
+echo "Install font"
+git clone --depth 1 git@github.com:ryanoasis/nerd-fonts
+cd nerd-fonts
+./install.sh Agave
+fc-cache -f -v
+cd ..
 source ~/.bashrc
