@@ -21,9 +21,13 @@ fi
 if [[ -n "$PAT_TOKEN" ]]; then
   echo "Using PAT token to clone repository"
   git clone --depth 1 --recurse-submodules --shallow-submodules https://${GITHUB_USER}:${PAT_TOKEN}@github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
+  git submodule init
+  git submodule update
 else
   echo "Cloning repository without PAT token"
-  git clone https://github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
+  git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
+  git submodule init
+  git submodule update
 fi
 
 # Do the rest of the tasks from the home dir
