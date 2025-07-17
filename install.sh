@@ -93,9 +93,6 @@ fi
 sudo mkdir -p /home/vscode/.local/share
 sudo chown -R vscode:vscode /home/vscode/.local
 
-# Ensure that I can commit
-git config commit.gpgSign false
-
 PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
