@@ -89,6 +89,12 @@ else
   sudo chsh -s /usr/bin/bash $USER
 fi
 
+# Ensure nvim has access to local shared
+sudo mkdir -p /home/vscode/.local/share
+sudo chown -R vscode:vscode /home/vscode/.local
+
+# Ensure that I can commit
+git config commit.gpgSign false
 
 PATH=${PATH}:/opt/nvim/bin/
 
