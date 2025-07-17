@@ -17,3 +17,7 @@
 	defaultBranch = main
 [submodule]
 	recurse = true
+[user]
+    email = juancruz.f87@gmail.com
+    name = juanito87
+    signingKey = EAB042894FD44AFD
