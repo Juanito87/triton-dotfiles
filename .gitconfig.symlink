@@ -1,22 +1,24 @@
-[core]
-    excludesfile = ~/.gitignore-global
+[core]                                                                                                                                                                        
+     excludesfile = ~/.gitignore-global
 [difftool]
-    prompt = false
+     prompt = false
 [alias]
-    ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --date=relative
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [a:%an,c:%cn]" --decorate --numstat
-    fl = log -u
+     ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --date=relative
+     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [a:%an,c:%cn]" --decorate --numstat
+     fl = log -u
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+     process = git-lfs filter-process
+     required = true
+     clean = git-lfs clean -- %f
+     smudge = git-lfs smudge -- %f
 [pull]
-	rebase = false
+     rebase = false
 [init]
-	defaultBranch = main
+     defaultBranch = main
 [submodule]
-	recurse = true
+     recurse = true
+[push]
+     autoSetupRemote = true
 [user]
-    email = juancruz.f87@gmail.com
-    name = juanito87
+     email = juancruz.f87@gmail.com
+     name = juanito87
