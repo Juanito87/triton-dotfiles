@@ -105,3 +105,4 @@ cd nerd-fonts
 fc-cache -f -v
 cd ..
 source ~/.bashrc
+brc
