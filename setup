@@ -106,3 +106,4 @@ fc-cache -f -v
 cd ..
 source ~/.bashrc
 brc
+sudo unminimize
