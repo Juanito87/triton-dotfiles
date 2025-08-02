@@ -1,0 +1,107 @@
+#!/bin/bash
+
+if [ -z "$USER" ]; then
+    USER=$(id -un)
+fi
+
+echo >&2 "====================================================================="
+echo >&2 " Setting up codespaces environment"
+echo >&2 ""
+echo >&2 " USER        $USER"
+echo >&2 " HOME        $HOME"
+echo >&2 "====================================================================="
+
+# Backup existing .dotfiles directory if it exists
+if [[ -d $HOME/.dotfiles.backup ]]; then
+  rm -rf
+  $HOME/.dotfiles.backup
+else
+  if [[ -d $HOME/.dotfiles ]]; then
+    echo "Backing up existing .dotfiles directory"
+    mv $HOME/.dotfiles $HOME/.dotfiles.backup || echo "Backup failed"
+  fi
+fi
+
+# Clone the dotfiles repository
+if [[ -n "$PAT_TOKEN" ]]; then
+  echo "Using PAT token to clone repository"
+  git clone --depth 1 --recurse-submodules --shallow-submodules https://${GITHUB_USER}:${PAT_TOKEN}@github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
+  git submodule init
+  git submodule update
+else
+  echo "Cloning repository without PAT token"
+  git clone --depth 1 --recurse-submodules --shallow-submodules https://github.com/${GITHUB_USER}/triton-dotfiles.git $HOME/.dotfiles
+  git submodule init
+  git submodule update
+fi
+
+# Do the rest of the tasks from the home dir
+cd $HOME
+
+# create bindir
+mkdir -p $HOME/bin
+
+# Install fzf
+FZF_VERSION=v0.61.3
+echo "Install fzf to version $FZF_VERSION"
+if [ "$(ls -A ~/.fzf)" ];
+then
+  cd ~/.fzf
+  git fetch
+  git checkout $FZF_VERSION
+  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+else
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  cd ~/.fzf
+  git checkout $FZF_VERSION
+  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+fi
+cd ..
+
+# A bit of a hack
+[ -f .gitconfig ] && mv .gitconfig .gitconfig.private
+[ -f .bashrc ] && mv .bashrc .bashrc.dist
+
+# Run dotfiles.symlink if it exists
+if [[ -f $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
+  echo "File exists"
+  if [[ -x $HOME/.dotfiles/bin/dotfiles.symlink ]]; then
+    echo "File is executable"
+    $HOME/.dotfiles/bin/dotfiles.symlink install
+  else
+    echo "Making file executable"
+    chmod +x $HOME/.dotfiles/bin/dotfiles.symlink
+    $HOME/.dotfiles/bin/dotfiles.symlink install
+  fi
+else
+  echo "Missing dotfiles.symlink"
+fi
+
+# Setting proper terminal
+if [[ -n "$FISH"  ]]; then
+  echo "Setting shell to fish"
+  sudo chsh -s /usr/bin/fish $USER
+elif [[ -n "$ZSH" ]]; then
+  echo "Setting shell to zsh"
+  sudo chsh -s /usr/bin/zsh $USER
+else
+  echo "Setting shell to bash"
+  sudo chsh -s /usr/bin/bash $USER
+fi
+
+# Ensure nvim has access to local shared
+sudo mkdir -p /home/vscode/.local/share
+sudo chown -R vscode:vscode /home/vscode/.local
+
+PATH=${PATH}:/opt/nvim/bin/
+
+sudo apt-get update
+sudo apt-get install -y ripgrep fd-find cmake
+cargo install starship --locked
+echo "Install font"
+git clone --depth 1 git@github.com:ryanoasis/nerd-fonts
+cd nerd-fonts
+./install.sh Agave
+fc-cache -f -v
+cd ..
+source ~/.bashrc
