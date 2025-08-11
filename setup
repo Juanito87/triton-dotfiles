@@ -99,11 +99,10 @@ sudo apt-get update
 sudo apt-get install -y ripgrep fd-find cmake
 cargo install starship --locked
 echo "Install font"
-git clone --depth 1 git@github.com:ryanoasis/nerd-fonts
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 cd nerd-fonts
 ./install.sh Agave
 fc-cache -f -v
 cd ..
-source ~/.bashrc
-brc
-# sudo unminimize
+source $HOME/.bashrc
+sudo unminimize
