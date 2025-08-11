@@ -38,9 +38,6 @@ fi
 # Do the rest of the tasks from the home dir
 cd $HOME
 
-# create bindir
-mkdir -p $HOME/bin
-
 # Install fzf
 FZF_VERSION=v0.61.3
 echo "Install fzf to version $FZF_VERSION"
