@@ -6,6 +6,11 @@ if ! [ -f "$HOME/.ssh/id_rsa" ]; then
   ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -P ""
 fi
 
+# Ensure bashrc is loaded
+if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+fi
+
 # ssh agent
 if [ -f "$HOME/.ssh-agent-rc" ]; then
   source "$HOME/.ssh-agent-rc"
