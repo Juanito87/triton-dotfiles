@@ -102,4 +102,4 @@ cd nerd-fonts
 fc-cache -f -v
 cd ..
 source $HOME/.bashrc
-sudo unminimize
+yes | sudo unminimize
