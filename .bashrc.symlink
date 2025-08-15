@@ -1,7 +1,3 @@
 #!/bin/bash
 # login shell load profile
 [ -n "$PS1" ] && source $HOME/.bash_profile
-# if we have a distribution bashrc
-[ -f "$HOME/.bashrc.dist" ] && source $HOME/.bashrc.dist;
-# shellcheck disable=1090
-source ~/.shell_config/bash/bashrc
