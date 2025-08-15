@@ -8,7 +8,7 @@ fi
 
 # Ensure bashrc is loaded
 if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
+    source "$HOME/.bashrc"
 fi
 
 # ssh agent
