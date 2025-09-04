@@ -19,7 +19,7 @@ function triton_ssh()
         fi
         ${DIRNAME}/vault-auth-ssh.sh | tee | vault write -field=signed_key ssh-client/sign/admin - >"${VAULT_IDENTITY_FILE}"
     fi
-    /usr/bin/ssh "$node".rpcpool.wg "$@" -i "${VAULT_IDENTITY_FILE}" -t /bin/sh "command -v tmux &>/dev/null || tmux new -A -s $(whoami) || $SHELL -l"
+    /usr/bin/ssh juanito@"$node".rpcpool.wg "$@" -i "${VAULT_IDENTITY_FILE}" -t /bin/sh "command -v tmux &>/dev/null || tmux new -A -s $(whoami) || $SHELL -l"
 }
 
 # Call main function
