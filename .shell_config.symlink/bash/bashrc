@@ -12,6 +12,11 @@ shopt -s globstar
 
 # Make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# Setting tmux on interactive start.
+case $- in
+     *i*) tmux;;
+       *) return;;
+esac
 
 #Enabling bash completion
 if ! shopt -oq posix; then
