@@ -17,5 +17,4 @@ else
   ssh-add $HOME/.ssh/id_rsa
 fi
 
-alias s='function _s() { /workspaces/rpcpool/vault-ssh.sh "$1.rpcpool.wg"; }; _s'
 source /workspaces/rpcpool/.devcontainer/bashrc.sh
