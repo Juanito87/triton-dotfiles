@@ -9,7 +9,7 @@ function triton_ssh()
 {
     node=$1
     shift # Remove $1 from $@
-    DIRNAME=/workspace/rpcpool
+    DIRNAME=/workspaces/rpcpool
     command -v vault >/dev/null 2>&1 || { echo "Vault is not in your path. Please install or add vault location to \$PATH.  Aborting." >&2; exit 1; }
     VAULT_IDENTITY_FILE=${VAULT_IDENTITY_FILE:="${HOME}/.ssh/vault-identity.pub"}
     if [[ -n "$VAULT_IDENTITY_FILE" ]]; then
