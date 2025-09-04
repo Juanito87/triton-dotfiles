@@ -1,0 +1,26 @@
+#!/bin/bash
+# SSH with automatic tmux connection, fails over to normal shell if no tmux is present
+# This one liner does:
+# - Checks if tmux is present
+# - Attachs or connnects to tmux
+# - If tmux is not present, starts a normal shell
+
+function triton_ssh()
+{
+    node=$1
+    shift # Remove $1 from $@
+    DIRNAME=/workspace/rpcpool
+    command -v vault >/dev/null 2>&1 || { echo "Vault is not in your path. Please install or add vault location to \$PATH.  Aborting." >&2; exit 1; }
+    VAULT_IDENTITY_FILE=${VAULT_IDENTITY_FILE:="${HOME}/.ssh/vault-identity.pub"}
+    if [[ -n "$VAULT_IDENTITY_FILE" ]]; then
+        set -o pipefail
+        if [[ -n "$VAULT_USERNAME" ]]; then
+            ${DIRNAME}/vault-login.sh
+        fi
+        ${DIRNAME}/vault-auth-ssh.sh | tee | vault write -field=signed_key ssh-client/sign/admin - >"${VAULT_IDENTITY_FILE}"
+    fi
+    /usr/bin/ssh "$node".rpcpool.wg "$@" -i "${VAULT_IDENTITY_FILE}" -t /bin/sh "command -v tmux &>/dev/null || tmux new -A -s $(whoami) || $SHELL -l"
+}
+
+# Call main function
+triton_ssh "$@"
