@@ -25,6 +25,7 @@ alias df='\df -h'
 # Setting Alias for enhanced commands
 alias ls='better-ls'
 alias history='better-history'
+alias s='triton-ssh'
 
 # Reload rc files local/remote
 alias brc='source ~/.bashrc'
