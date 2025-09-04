@@ -6,8 +6,6 @@ if ! [ -f "$HOME/.ssh/id_rsa" ]; then
   ssh-keygen -t rsa -b 4096 -f $HOME/.ssh/id_rsa -P ""
 fi
 
-# if we have a distribution bashrc
-[ -f "$HOME/.bashrc.dist" ] && source $HOME/.bashrc.dist;
 # shellcheck disable=1090
 source ~/.shell_config/bash/bashrc
 
