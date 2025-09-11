@@ -18,4 +18,4 @@ export PATH=~/.shell_config/commands:$PATH
 export STARSHIP_CONFIG=~/.shell_config/starship.toml
 
 # kubectl vars
-export KUBECONFG=/workspaces/talos-nyc1-kubeconfig
+export KUBECONFIG=/workspaces/talos-nyc1-kubeconfig
