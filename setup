@@ -46,12 +46,12 @@ then
   cd ~/.fzf
   git fetch
   git checkout $FZF_VERSION
-  ~/.fzf/install --no-update-rc
+  ~/.fzf/install --no-update-rc --key-bindings --completion
 else
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   cd ~/.fzf
   git checkout $FZF_VERSION
-  ~/.fzf/install --no-update-rc
+  ~/.fzf/install --no-update-rc --key-bindings --completion
 fi
 cd ..
 
