@@ -39,7 +39,7 @@ fi
 cd $HOME
 
 # Install fzf
-FZF_VERSION=v0.61.3
+FZF_VERSION=0.65.2
 echo "Install fzf to version $FZF_VERSION"
 if [ "$(ls -A ~/.fzf)" ];
 then
