@@ -46,12 +46,12 @@ then
   cd ~/.fzf
   git fetch
   git checkout $FZF_VERSION
-  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+  ~/.fzf/install --no-update-rc
 else
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   cd ~/.fzf
   git checkout $FZF_VERSION
-  ~/.fzf/install --no-key-bindings --no-completion --no-update-rc
+  ~/.fzf/install --no-update-rc
 fi
 cd ..
 
@@ -93,13 +93,20 @@ sudo chown -R vscode:vscode /home/vscode/.local
 PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
-sudo apt-get install -y ripgrep fd-find cmake
+sudo apt-get install -y ripgrep fd-find cmake shellcheck stylua terraform-ls
+rustup default stable
 cargo install starship --locked
+
 echo "Install font"
-git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-cd nerd-fonts
-./install.sh Agave
-fc-cache -f -v
-cd ..
+FONTS=("Agave" "FiraCode" "NerdFontsSymbolsOnly" )
+mkdir -p ~/.local/share/fonts
+for FONT in "${FONTS[@]}"; do
+  echo "Installing $FONT Nerd Font..."
+  URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${FONT}.zip"
+  wget -q "$URL" -O /tmp/${FONT}.zip
+  unzip -o /tmp/${FONT}.zip -d ~/.local/share/fonts/${FONT}
+done
+fc-cache -fv
+
 source $HOME/.bashrc
 yes | sudo unminimize
