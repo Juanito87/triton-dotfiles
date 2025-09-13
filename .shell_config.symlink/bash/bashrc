@@ -28,6 +28,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Calling env variables
+# shellcheck disable=SC1091 disable=1090
+source "$HOME"/.shell_config/env
+
 #Add starship
 eval "$(starship init bash)"
 # FZF
@@ -51,10 +56,6 @@ do
        source "$f";
    fi
 done
-
-# Calling env variables
-# shellcheck disable=SC1091 disable=1090
-source "$HOME"/.shell_config/env
 
 # Saving all commands to history, to have all tmux panes history.
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
