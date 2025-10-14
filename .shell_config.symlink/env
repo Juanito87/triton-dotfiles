@@ -14,6 +14,9 @@ export LS_COLORS
 # Exporting personalized commands to path
 export PATH=~/.shell_config/commands:$PATH
 
+# Exporting cargo bin to path
+export PATH=~/.cargo/bin:$PATH
+
 # Starship
 export STARSHIP_CONFIG=~/.shell_config/starship.toml
 
