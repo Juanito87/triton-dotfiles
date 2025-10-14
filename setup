@@ -92,11 +92,14 @@ sudo chown -R vscode:vscode /home/vscode/.local
 
 PATH=${PATH}:/opt/nvim/bin/
 
+# Installing packages and fonts
 sudo apt-get update
 sudo apt-get install -y ripgrep fd-find cmake shellcheck
 rustup default stable
 cargo install starship --locked
 cargo install cargo-cache --locked
+npm install -g @github/copilot
+npm install -g @devcontainers/cli
 
 echo "Install font"
 FONTS=("Agave" "FiraCode" "NerdFontsSymbolsOnly" )
@@ -109,8 +112,8 @@ for FONT in "${FONTS[@]}"; do
 done
 fc-cache -fv
 
-npm install -g @github/copilot
-npm install -g @devcontainers/cli
-
-source $HOME/.bashrc
+# Unminimize to be able to use man
 yes | sudo unminimize
+
+# Load config
+source $HOME/.bashrc
