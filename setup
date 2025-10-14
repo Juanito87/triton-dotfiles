@@ -108,5 +108,7 @@ for FONT in "${FONTS[@]}"; do
 done
 fc-cache -fv
 
+npm install -g @github/copilot
+
 source $HOME/.bashrc
 yes | sudo unminimize
