@@ -96,6 +96,7 @@ sudo apt-get update
 sudo apt-get install -y ripgrep fd-find cmake shellcheck
 rustup default stable
 cargo install starship --locked
+cargo install cargo-cache --locked
 
 echo "Install font"
 FONTS=("Agave" "FiraCode" "NerdFontsSymbolsOnly" )
