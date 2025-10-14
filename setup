@@ -93,7 +93,7 @@ sudo chown -R vscode:vscode /home/vscode/.local
 PATH=${PATH}:/opt/nvim/bin/
 
 sudo apt-get update
-sudo apt-get install -y ripgrep fd-find cmake shellcheck stylua terraform-ls
+sudo apt-get install -y ripgrep fd-find cmake shellcheck
 rustup default stable
 cargo install starship --locked
 
