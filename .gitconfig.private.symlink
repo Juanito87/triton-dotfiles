@@ -5,7 +5,9 @@
     required = true
 [gpg]
     program = /.codespaces/bin/gh-gpgsign
-    gpgsign = true
+    format = ssh
+[commit]
+  gpgsign = true
 [init]
     defaultBranch = main
 [credential]
@@ -13,6 +15,7 @@
 [user]
    name = Juanito
    email = 11276687+Juanito87@users.noreply.github.com
+   signingkey = /home/vscode/.ssh/id_ed25519_signing
 [core]                                                                                                                                                                        
   excludesfile = ~/.gitignore-global
   editor = nvim
