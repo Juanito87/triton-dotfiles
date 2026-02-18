@@ -54,6 +54,8 @@ else
   ~/.fzf/install --no-update-rc --key-bindings --completion
 fi
 cd ..
+export PATH="$HOME/.fzf/bin:$PATH"
+
 
 # A bit of a hack
 [ -f .gitconfig ] && mv .gitconfig .gitconfig.private
