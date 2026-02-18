@@ -4,7 +4,6 @@
     process = git-lfs filter-process
     required = true
 [gpg]
-    program = /.codespaces/bin/gh-gpgsign
     format = ssh
 [commit]
   gpgsign = true
