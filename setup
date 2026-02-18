@@ -116,6 +116,12 @@ for FONT in "${FONTS[@]}"; do
 done
 fc-cache -fv
 
+# Setup ssh key for signing commits because github native options sucks
+mkdir -p ~/.ssh
+echo "$SIGNING_KEY" > ~/.ssh/id_ed25519_signing
+chmod 600 ~/.ssh/id_ed25519_signing
+ssh-keygen -y -f ~/.ssh/id_ed25519_signing > ~/.ssh/id_ed25519_signing.pub
+
 # Unminimize to be able to use man
 yes | sudo unminimize
 
