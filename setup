@@ -101,8 +101,8 @@ rustup default stable
 cargo install starship --locked
 cargo install cargo-cache --locked
 cargo install tree-sitter-cli
-npm install -g @github/copilot
-npm install -g @devcontainers/cli
+sudo npm install -g @github/copilot
+sudo npm install -g @devcontainers/cli
 export PATH="$HOME/.cargo/bin:$PATH"
 
 echo "Install font"
