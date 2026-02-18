@@ -11,9 +11,8 @@
 [credential]
    helper = /.codespaces/bin/gitcredential_github.sh
 [user]
-   name = " Juanito"
+   name = Juanito
    email = 11276687+Juanito87@users.noreply.github.com
-   editor = nvim
 [core]                                                                                                                                                                        
   excludesfile = ~/.gitignore-global
   editor = nvim
