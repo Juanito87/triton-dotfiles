@@ -100,8 +100,10 @@ sudo apt-get install -y ripgrep fd-find cmake shellcheck
 rustup default stable
 cargo install starship --locked
 cargo install cargo-cache --locked
+cargo install tree-sitter-cli
 npm install -g @github/copilot
 npm install -g @devcontainers/cli
+export PATH="$HOME/.cargo/bin:$PATH"
 
 echo "Install font"
 FONTS=("Agave" "FiraCode" "NerdFontsSymbolsOnly" )
