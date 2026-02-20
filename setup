@@ -127,6 +127,7 @@ sed -i 's/[[:space:]]*$//' ~/.ssh/id_ed25519_signing
 sed -i -e '$a\' ~/.ssh/id_ed25519_signing
 chmod 600 ~/.ssh/id_ed25519_signing
 ssh-keygen -y -f ~/.ssh/id_ed25519_signing > ~/.ssh/id_ed25519_signing.pub | echo "Failed to infer public key"
+echo "Juanito $(cat ~/.ssh/id_ed25519_signing)" >> ~/.ssh/allowed_signers
 
 # Unminimize to be able to use man
 yes | sudo unminimize
