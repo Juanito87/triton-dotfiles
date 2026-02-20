@@ -5,6 +5,8 @@
     required = true
 [gpg]
     format = ssh
+[gpg "ssh"]
+    allowedSignersFile = /home/vscode/.ssh/allowed_signers
 [commit]
     gpgsign = true
 [init]
