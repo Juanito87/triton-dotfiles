@@ -119,8 +119,14 @@ fc-cache -fv
 # Setup ssh key for signing commits because github native options sucks
 mkdir -p ~/.ssh
 echo "$SIGNING_KEY" > ~/.ssh/id_ed25519_signing
+# 1. Remove leading whitespace (spaces/tabs) from every line
+sed -i 's/^[[:space:]]*//' ~/.ssh/id_ed25519_signing
+# 2. Remove trailing whitespace from every line
+sed -i 's/[[:space:]]*$//' ~/.ssh/id_ed25519_signing
+# 3. Ensure the file ends with exactly one newline
+sed -i -e '$a\' ~/.ssh/id_ed25519_signing
 chmod 600 ~/.ssh/id_ed25519_signing
-ssh-keygen -y -f ~/.ssh/id_ed25519_signing > ~/.ssh/id_ed25519_signing.pub
+ssh-keygen -y -f ~/.ssh/id_ed25519_signing > ~/.ssh/id_ed25519_signing.pub | echo "Failed to infer public key"
 
 # Unminimize to be able to use man
 yes | sudo unminimize
