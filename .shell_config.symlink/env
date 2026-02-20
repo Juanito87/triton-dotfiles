@@ -22,3 +22,7 @@ export STARSHIP_CONFIG=~/.shell_config/starship.toml
 
 # kubectl vars
 export KUBECONFIG=/workspaces/talos-nyc1-kubeconfig
+
+# Setup fzf and nvim
+export PATH="$HOME/.fzf/bin:$PATH"
+export PATH="/opt/nvim/bin/:$PATH"
