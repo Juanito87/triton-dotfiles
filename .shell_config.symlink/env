@@ -26,3 +26,7 @@ export KUBECONFIG=/workspaces/talos-nyc1-kubeconfig
 # Setup fzf and nvim
 export PATH="$HOME/.fzf/bin:$PATH"
 export PATH="/opt/nvim/bin/:$PATH"
+
+# Remove codespaces injected vars for commit signature
+unset GIT_COMMITTER_NAME
+unset GIT_COMMITTER_EMAIL
